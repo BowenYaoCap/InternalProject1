@@ -2,14 +2,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace InternalProject1.Models
 {
-    [Table("tablEmployees")]
     public class Employee
     {
-        [Column("Name")]
+        [Key]
+        public int Id{get;set;}
         public string Name{get;set;}
-        [Column("Role")]
         public string Role{get;set;}
-        [Column("Email")]
         public string Email{get;set;}
     }
 }
