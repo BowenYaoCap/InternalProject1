@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pfoL6PbMYUFWchCRYTe1plFlrH/4HBWw9PKKcWWUcVs1gQg9yAVVGa1eNu9q80foau9F27i691is1GdMPR6wIg==",
+  "dgSpecHash": "apaVHbGqARbTGyugsVL4z2du6431Bsbl8BbPWEu0H+on5jxzfhfhsqFV9BxL2VQ434JcNoVggps0CSqRfwvyHg==",
   "success": true,
-  "projectFilePath": "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj",
+  "projectFilePath": "C:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\acater\\.nuget\\packages\\epplus\\5.7.3\\epplus.5.7.3.nupkg.sha512",
     "C:\\Users\\acater\\.nuget\\packages\\microsoft.extensions.configuration\\3.1.10\\microsoft.extensions.configuration.3.1.10.nupkg.sha512",

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj": {}
+    "C:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj": {}
   },
   "projects": {
-    "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj": {
+    "C:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj",
+        "projectUniqueName": "C:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj",
         "projectName": "InternalProject1",
-        "projectPath": "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj",
+        "projectPath": "C:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj",
         "packagesPath": "C:\\Users\\acater\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\obj\\",
+        "outputPath": "C:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\acater\\AppData\\Roaming\\NuGet\\NuGet.Config"

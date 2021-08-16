@@ -5,12 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using TESTFOLDER.Models;
+using InternalProject1.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using OfficeOpenXml;
 
-namespace TESTFOLDER.Controllers
+namespace InternalProject1.Controllers
 {
     public class HomeController : Controller
     {

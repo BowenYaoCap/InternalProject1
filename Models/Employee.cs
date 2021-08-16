@@ -1,4 +1,4 @@
-namespace TESTFOLDER.Models
+namespace InternalProject1.Models
 {
     public class Employee
     {
