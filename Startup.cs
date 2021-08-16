@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using InternalProject1.Models;
+using InternalProject1.Infra;
+using Microsoft.EntityFrameworkCore;
 
 namespace InternalProject1
 {
@@ -24,6 +27,15 @@ namespace InternalProject1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+              services.AddDbContext<DataContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DeveloperDatabase")));
+            services.AddScoped<IEmployeeAccess, EmployeeAccess>();
+            services.AddCors(o => o.AddPolicy("DefaultPolicy",builder =>{
+                builder.WithOrigins("https://localhost:4200","https://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+            }));
+            services.AddCors(o => o.AddPolicy("Custom Policy",UriBuilder=> {
+                UriBuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
