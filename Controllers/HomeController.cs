@@ -9,6 +9,7 @@ using InternalProject1.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using OfficeOpenXml;
+using Ganss.Excel;
 
 namespace InternalProject1.Controllers
 {
@@ -58,6 +59,17 @@ namespace InternalProject1.Controllers
                System.Console.WriteLine("ERROR: Exception {0} encountered. Make sure the file you posted exists.", e);
                return View();
            }
+        }
+        public IActionResult Export(){
+            ExcelMapper map = new ExcelMapper();
+            var Employees = new List<Employee>{
+                new Employee{Name = "Me!", Role = "THIS GUY!", Email = "TEST@EMIAL>COM"},
+                new Employee{Name = "You", Role = "THAT GUY!", Email = "TEST@EMIAL>COM"},
+                new Employee{Name = "US", Role = "THESE GUYS!", Email = "TEST@EMIAL>COM"}
+            };
+            var newFile = @"C:\Users\acater\Documents\NetTest\dotnetcode\InternalProject1\EmployeeList.xlsx";
+            map.Save(newFile,Employees,"Employee List",true);
+            return RedirectToAction("Index",Employees);
         }
         public IActionResult Index(List<Employee> list)
         {  
