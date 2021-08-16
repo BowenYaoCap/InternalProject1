@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj": {}
+    "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj": {}
   },
   "projects": {
-    "C:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj": {
+    "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj",
+        "projectUniqueName": "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj",
         "projectName": "InternalProject1",
-        "projectPath": "C:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj",
+        "projectPath": "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj",
         "packagesPath": "C:\\Users\\acater\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\obj\\",
+        "outputPath": "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\acater\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -35,6 +35,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[5.7.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
