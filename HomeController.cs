@@ -89,7 +89,7 @@ namespace InternalProject1.Controllers
 
         //Need to have forms with "EmployeeName","EmployeeRole", and "EmployeeEmail" ID for update method
         [HttpPost]
-        public IActionResult UpdateDepartment(IFormCollection form,int id){
+        public IActionResult UpdateEmployee(IFormCollection form,int id){
             var empname = form["EmployeeName"].ToString();
             var emprole = form["EmployeeRole"].ToString();
             var empemail = form["EmployeeEmail"].ToString();
