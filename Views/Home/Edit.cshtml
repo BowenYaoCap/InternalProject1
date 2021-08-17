@@ -1,0 +1,17 @@
+@model InternalProject1.Models.Employee
+
+<h1>
+    Edit Page for @Model.Name 
+    Id: @Model.Id
+</h1>
+<h2>
+    Edit the fields below and use the button to confirm changes.
+</h2>
+<div class="col-md-6">
+   @using(Html.BeginForm("UpdateEmployee","Home", new{Id = @Model.Id}, FormMethod.Post)){
+        @Html.TextBoxFor(m => m.Name) 
+        @Html.TextBoxFor(m => m.Role) 
+        @Html.TextBoxFor(m => m.Email) 
+    <button type = "submit" >Update Database</button>
+   }
+</div>

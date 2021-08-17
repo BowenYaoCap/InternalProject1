@@ -99,4 +99,4 @@ C:\Users\acater\Documents\NetTest\dotnetcode\InternalProject1\bin\Debug\netcorea
 C:\Users\acater\Documents\NetTest\dotnetcode\InternalProject1\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\acater\Documents\NetTest\dotnetcode\InternalProject1\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\acater\Documents\NetTest\dotnetcode\InternalProject1\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\acater\Documents\NetTest\dotnetcode\InternalProject1\obj\Debug\netcoreapp3.1\Razor\Views\Home\Information.cshtml.g.cs
+C:\Users\acater\Documents\NetTest\dotnetcode\InternalProject1\obj\Debug\netcoreapp3.1\Razor\Views\Home\Edit.cshtml.g.cs

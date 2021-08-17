@@ -70,7 +70,7 @@ namespace InternalProject1.Controllers
             map.Save(newFile,Employees,"Employee List",true);
             return RedirectToAction("Index");
         }
-        public IActionResult Information(int Id){
+        public IActionResult Edit(int Id){
             return View(dataAccess.GetEmployeeById(Id));
         }
         public IActionResult Index()
