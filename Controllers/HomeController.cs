@@ -38,9 +38,10 @@ namespace InternalProject1.Controllers
                         //All the information is then added to an Employee list that was initilized above.
                         for(int row = 2; row <= rowcount; row++){
                             list.Add(new Employee{
-                                Name = worksheet.Cells[row,1].Value.ToString().Trim(),
-                                Role = worksheet.Cells[row,2].Value.ToString().Trim(),
-                                Email = worksheet.Cells[row,3].Value.ToString().Trim()
+                                Id = int.Parse(worksheet.Cells[row,1].Value.ToString().Trim()),
+                                Name = worksheet.Cells[row,2].Value.ToString().Trim(),
+                                Role = worksheet.Cells[row,3].Value.ToString().Trim(),
+                                Email = worksheet.Cells[row,4].Value.ToString().Trim()
                             });
                         }
                     }
@@ -48,10 +49,10 @@ namespace InternalProject1.Controllers
                 foreach(var stu in list){
                     Employee emp = new Employee{Name = stu.Name,Role = stu.Role,Email = stu.Email};
                     dataAccess.SaveEmployee(emp);
-                    System.Console.WriteLine("Name:{0}\tRole:{1}\tEmail:{2}",stu.Name,stu.Role,stu.Email);
+                    System.Console.WriteLine("Name:{0}\tRole:{1}\tEmail:{2}\tId:{3}",stu.Name,stu.Role,stu.Email,stu.Id);
                 }
                 //NOTE: This will be changed as it doesn't work. Will implement DB to fix later...
-                return RedirectToAction("Index",list);
+                return RedirectToAction("Index");
            }
            catch(Exception e){
                System.Console.WriteLine("ERROR: Exception {0} encountered. Make sure the file you posted exists.", e);
@@ -61,18 +62,20 @@ namespace InternalProject1.Controllers
         public IActionResult Export(){
             ExcelMapper map = new ExcelMapper();
             var Employees = new List<Employee>{
-                new Employee{Name = "Me!", Role = "THIS GUY!", Email = "TEST@EMIAL>COM"},
-                new Employee{Name = "You", Role = "THAT GUY!", Email = "TEST@EMIAL>COM"},
-                new Employee{Name = "US", Role = "THESE GUYS!", Email = "TEST@EMIAL>COM"}
+                new Employee{Name = "Me!", Role = "THIS GUY!", Email = "TEST@EMIAL>COM", Id = 1},
+                new Employee{Name = "You", Role = "THAT GUY!", Email = "TEST@EMIAL>COM", Id = 2},
+                new Employee{Name = "US", Role = "THESE GUYS!", Email = "TEST@EMIAL>COM", Id = 3}
             };
-            var newFile = @"C:\Users\dmiyamot\Documents\dotnetcore\InternalProject1\EmployeeList.xlsx";
+            var newFile = @"C:\Users\acater\Documents\EmployeeList.xlsx";
             map.Save(newFile,Employees,"Employee List",true);
-            return RedirectToAction("Index",Employees);
+            return RedirectToAction("Index");
         }
-
-        public IActionResult Index(List<Employee> list)
+        public IActionResult Information(int Id){
+            return View(dataAccess.GetEmployeeById(Id));
+        }
+        public IActionResult Index()
         {  
-            return View(list);
+            return View(dataAccess.GetAllEmployees());
         }
 
         public IActionResult Privacy()

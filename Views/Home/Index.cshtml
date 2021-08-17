@@ -35,6 +35,7 @@
                         <td>@student.Name</td>
                         <td>@student.Role</td>
                         <td>@student.Email</td>
+                        <td>@Html.ActionLink("Display","Information",new{Id = student.Id},htmlAttributes: new {@class="btn"}) </td>
                     </tr>
                 }
             </tbody>
