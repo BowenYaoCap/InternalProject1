@@ -78,9 +78,41 @@ namespace InternalProject1.Controllers
             return View(dataAccess.GetAllEmployees());
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
+        [HttpGet]
+        public IActionResult GetAllEmployees(){
+            var result = dataAccess.GetAllEmployees();
+            return View(result);
+        }
+
+        public IActionResult GetEmployeeById(int id){
+            var emp = dataAccess.GetEmployeeById(id);
+            return View(emp);
+        }
+
+        //Need to have forms with "EmployeeName","EmployeeRole", and "EmployeeEmail" ID for update method
+        [HttpPost]
+        public IActionResult UpdateEmployee(IFormCollection form,int id){
+            var empname = form["EmployeeName"].ToString();
+            var emprole = form["EmployeeRole"].ToString();
+            var empemail = form["EmployeeEmail"].ToString();
+            var emp = dataAccess.GetEmployeeById(id);
+            if(empname != null){
+                emp.Name = empname;
+            }
+            if(emprole != null){
+                emp.Role = emprole;
+            }
+            if(empemail != null){
+                emp.Email = empemail;
+            }
+            dataAccess.UpdateEmployee(emp);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult DeleteEmployee(int id){
+            dataAccess.DeleteEmployee(id);
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
