@@ -4,14 +4,25 @@
     Edit Page for @Model.Name 
     Id: @Model.Id
 </h1>
-<h2>
+<head>
     Edit the fields below and use the button to confirm changes.
-</h2>
+</head>
+<br></br>
 <div class="col-md-6">
    @using(Html.BeginForm("UpdateEmployee","Home", new{Id = @Model.Id}, FormMethod.Post)){
-        @Html.TextBoxFor(m => m.Name) 
-        @Html.TextBoxFor(m => m.Role) 
-        @Html.TextBoxFor(m => m.Email) 
-    <button type = "submit" >Update Database</button>
+    
+        <pre>Name:   @Html.TextBoxFor(m => m.Name) </pre>
+    
+        <pre>Role:   @Html.TextBoxFor(m => m.Role) </pre>
+    
+        <pre>Email:  @Html.TextBoxFor(m => m.Email) </pre>
+        <br></br>
+    
+    <button type = "submit" >Update</button>
+    <button type = "cancel">Cancel</button>
+    
+   }
+   @using(Html.BeginForm("DeleteEmployee","Home", new{Id = @Model.Id}, FormMethod.Get)){
+       <button type = "submit">Delete</button>
    }
 </div>
