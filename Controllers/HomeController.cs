@@ -60,15 +60,18 @@ namespace InternalProject1.Controllers
            }
         }
         public IActionResult Export(){
-            ExcelMapper map = new ExcelMapper();
-            var Employees = new List<Employee>{
-                new Employee{Name = "Me!", Role = "THIS GUY!", Email = "TEST@EMIAL>COM", Id = 1},
-                new Employee{Name = "You", Role = "THAT GUY!", Email = "TEST@EMIAL>COM", Id = 2},
-                new Employee{Name = "US", Role = "THESE GUYS!", Email = "TEST@EMIAL>COM", Id = 3}
-            };
-            var newFile = @"C:\Users\acater\Documents\EmployeeList.xlsx";
-            map.Save(newFile,Employees,"Employee List",true);
-            return RedirectToAction("Index");
+            try{
+                ExcelMapper map = new ExcelMapper();
+                var Employees = dataAccess.GetAllEmployees();
+                var newFile = @"C:\Users\acater\Documents\EmployeeList.xlsx";
+                map.Save(newFile,Employees,"EmployeeList",true);
+                return RedirectToAction("Index");
+            }
+            catch(IOException e){
+                System.Console.WriteLine("Encountered IO Error {0}\nMake sure file is not being used when exporting!",e);
+                return RedirectToAction("Index");
+            }
+            
         }
         public IActionResult Edit(int Id){
             return View(dataAccess.GetEmployeeById(Id));
@@ -113,6 +116,25 @@ namespace InternalProject1.Controllers
         public IActionResult DeleteEmployee(int id){
             dataAccess.DeleteEmployee(id);
             return RedirectToAction("Index");
+        }
+        public IActionResult Add(){
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddEmployee(IFormCollection form){
+            
+            var empname = form["Name"].ToString();
+            var emprole = form["Role"].ToString();
+            var empemail = form["Email"].ToString();
+        
+            if(empname != null&&emprole != null&&empemail !=null){
+                dataAccess.SaveEmployee(new Employee{Name = empname, Role = emprole, Email = empemail});
+                return RedirectToAction("Index");
+            }
+            else{
+                return View();
+            }
+            
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

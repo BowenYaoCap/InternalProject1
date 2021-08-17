@@ -19,9 +19,12 @@
         <br></br>
     
     <button type = "submit" >Update</button>
-    <button type = "cancel">Cancel</button>
-    
    }
+   <br></br>
+    @using(Html.BeginForm("Index","Home", FormMethod.Get)){
+       <button type = "submit">Cancel</button>
+   }
+   <br></br>
    @using(Html.BeginForm("DeleteEmployee","Home", new{Id = @Model.Id}, FormMethod.Get)){
        <button type = "submit">Delete</button>
    }
