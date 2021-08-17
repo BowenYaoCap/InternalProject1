@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using InternalProject1.Models;
 using Microsoft.AspNetCore.Http;
+using InternalProject1.Infra;
 using System.IO;
 using OfficeOpenXml;
 using Ganss.Excel;
@@ -15,21 +16,16 @@ namespace InternalProject1.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IEmployeeDataAccess EmployeeAccess;
-        private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
+        private readonly IEmployeeDataAccess dataAccess;
+        
+        public HomeController(IEmployeeDataAccess da){
+            dataAccess = da;
         }
         public async Task<IActionResult> Import(IFormFile file){
-           //Checks to see if the file uploaded exists
-           //TODO: Check if its an excel file
            if(file == null){
-               
                return View();
            }
            try{
-               
                 var list = new List<Employee>(); 
                 using (var stream = new MemoryStream()){
                     //Waits for a file to be sent to the stream. Or in other words uploaded to the webpage
@@ -50,7 +46,8 @@ namespace InternalProject1.Controllers
                     }
                 }
                 foreach(var stu in list){
-                    //prints out all Employees in the list
+                    Employee emp = new Employee{Name = stu.Name,Role = stu.Role,Email = stu.Email};
+                    dataAccess.SaveEmployee(emp);
                     System.Console.WriteLine("Name:{0}\tRole:{1}\tEmail:{2}",stu.Name,stu.Role,stu.Email);
                 }
                 //NOTE: This will be changed as it doesn't work. Will implement DB to fix later...
@@ -68,10 +65,11 @@ namespace InternalProject1.Controllers
                 new Employee{Name = "You", Role = "THAT GUY!", Email = "TEST@EMIAL>COM"},
                 new Employee{Name = "US", Role = "THESE GUYS!", Email = "TEST@EMIAL>COM"}
             };
-            var newFile = @"C:\Users\acater\Documents\NetTest\dotnetcode\InternalProject1\EmployeeList.xlsx";
+            var newFile = @"C:\Users\dmiyamot\Documents\dotnetcore\InternalProject1\EmployeeList.xlsx";
             map.Save(newFile,Employees,"Employee List",true);
             return RedirectToAction("Index",Employees);
         }
+
         public IActionResult Index(List<Employee> list)
         {  
             return View(list);

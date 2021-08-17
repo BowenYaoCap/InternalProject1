@@ -13,5 +13,10 @@ namespace InternalProject1.Infra{
             return context.Employees.ToList();
         }
 
+        public void SaveEmployee(Employee emp){
+            context.Employees.Add(emp);
+            context.SaveChanges();
+        }
+
     }
 }
