@@ -13,6 +13,7 @@ using OfficeOpenXml;
 using Ganss.Excel;
 using System.Net;
 
+
 namespace InternalProject1.Controllers
 {
     public class HomeController : Controller
@@ -83,12 +84,12 @@ namespace InternalProject1.Controllers
                 var newFile = AppDomain.CurrentDomain.BaseDirectory+"..\\..\\..\\"+"EmployeeList.xlsx";
                 System.Console.WriteLine(newFile);
                 map.Save(newFile,Employees,"EmployeeList",true);
-
                 //this section is commented out for now but may be useful when we push to an azure enviroment.
                 // using(var client = new WebClient()){ 
                 //     client.DownloadFile("http://localhost:5001/EmployeeList.xlsx",newFile);
                 // } 
-                return RedirectToAction("Index");
+                var bytes = System.IO.File.ReadAllBytes(newFile);
+                return File(bytes,"Application/x-msexcel",newFile);
             }
             //Catches IO Errors that likely happen as a result of an impossible file path or the file being active.
             catch(IOException e){
