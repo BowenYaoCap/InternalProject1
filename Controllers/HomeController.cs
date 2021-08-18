@@ -72,7 +72,6 @@ namespace InternalProject1.Controllers
                 //New version saves excel file to a memory stream rather to an actual file location. 
                 //Might circumvent the need for a file system on azure
                 MemoryStream stream = new MemoryStream();
-                System.Console.WriteLine(newFile);
                 map.Save(stream,Employees,"EmployeeList",true);
                 //this section is commented out for now but may be useful when we push to an azure enviroment.
                 // using(var client = new WebClient()){ 
