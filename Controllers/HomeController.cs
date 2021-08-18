@@ -49,10 +49,21 @@ namespace InternalProject1.Controllers
                         }
                     }
                 }
+                var CurrentEmps = dataAccess.GetAllEmployees();
                 foreach(var stu in list){
                     //Adds each employee found from the excel file to dataAccess and saves it.
                     Employee emp = new Employee{Name = stu.Name,Role = stu.Role,Email = stu.Email};
-                    dataAccess.SaveEmployee(emp);
+                    //Checks to see if that email is already in use as these should be unuique to each person.
+                    bool contains = false;
+                    foreach(Employee tempemp  in CurrentEmps){
+                        if(tempemp.Email.Equals(stu.Email)){
+                            contains = true;
+                            break;
+                        }
+                    }
+                    if(!contains){
+                        dataAccess.SaveEmployee(emp);
+                    }
                     //System.Console.WriteLine("Name:{0}\tRole:{1}\tEmail:{2}\tId:{3}",stu.Name,stu.Role,stu.Email,stu.Id);
                 }
                 return RedirectToAction("Index");
