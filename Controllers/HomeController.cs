@@ -22,6 +22,8 @@ namespace InternalProject1.Controllers
         public HomeController(IEmployeeDataAccess da){
             dataAccess = da;
         }
+        //This function requires a file to read uploaded from the view.
+        //Theoretically this should work on an Azure env as well.
         public async Task<IActionResult> Import(IFormFile file){
            if(file == null){
                return View();
@@ -63,14 +65,16 @@ namespace InternalProject1.Controllers
         }
         public IActionResult Export(){
             try{
-               
+                //This section uses ExcelMapper to map a list of employees to an excel file and save it to the specified location
                 ExcelMapper map = new ExcelMapper();
                 var Employees = dataAccess.GetAllEmployees();
-                //var newFile = @"C:\EmployeesList.xlsx";
+                //The line below saves EmployeeList.xlsx to the Internal Project folder in any given structure. This will work locally but not for Azure env
                 var newFile = AppDomain.CurrentDomain.BaseDirectory+"..\\..\\..\\"+"EmployeeList.xlsx";
                 System.Console.WriteLine(newFile);
                 map.Save(newFile,Employees,"EmployeeList",true);
-                // using(var client = new WebClient()){
+
+                //this section is commented out for now but may be useful when we push to an azure enviroment.
+                // using(var client = new WebClient()){ 
                 //     client.DownloadFile("http://localhost:5001/EmployeeList.xlsx",newFile);
                 // } 
                 return RedirectToAction("Index");
@@ -101,7 +105,7 @@ namespace InternalProject1.Controllers
             return View(emp);
         }
 
-        //Need to have forms with "EmployeeName","EmployeeRole", and "EmployeeEmail" ID for update method
+        //Need to have forms with "Name","Role", and "Email" ID for update method
         [HttpPost]
         public IActionResult UpdateEmployee(IFormCollection form,int id){
             var empname = form["Name"].ToString();
