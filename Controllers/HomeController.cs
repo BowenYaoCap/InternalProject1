@@ -69,16 +69,16 @@ namespace InternalProject1.Controllers
                 //This section uses ExcelMapper to map a list of employees to an excel file and save it to the specified location
                 ExcelMapper map = new ExcelMapper();
                 var Employees = dataAccess.GetAllEmployees();
-                //The line below saves EmployeeList.xlsx to the Internal Project folder in any given structure. This will work locally but not for Azure env
-                var newFile = AppDomain.CurrentDomain.BaseDirectory+"..\\..\\..\\"+"EmployeeList.xlsx";
+                //New version saves excel file to a memory stream rather to an actual file location. 
+                //Might circumvent the need for a file system on azure
+                MemoryStream stream = new MemoryStream();
                 System.Console.WriteLine(newFile);
-                map.Save(newFile,Employees,"EmployeeList",true);
+                map.Save(stream,Employees,"EmployeeList",true);
                 //this section is commented out for now but may be useful when we push to an azure enviroment.
                 // using(var client = new WebClient()){ 
                 //     client.DownloadFile("http://localhost:5001/EmployeeList.xlsx",newFile);
                 // } 
-                var bytes = System.IO.File.ReadAllBytes(newFile);
-                return File(bytes,"Application/x-msexcel",newFile);
+                return File(stream.ToArray(),"Application/x-msexcel", "EmployeeList.xlsx");
             }
             //Catches IO Errors that likely happen as a result of an impossible file path or the file being active.
             catch(IOException e){
