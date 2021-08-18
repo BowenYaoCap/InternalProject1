@@ -14402,6 +14402,11 @@
   "RootNamespace": "InternalProject1",
   "Documents": [
     {
+      "FilePath": "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\Views\\Home\\Edit.cshtml",
+      "TargetPath": "Views\\Home\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"
@@ -14422,8 +14427,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\Views\\Home\\Import.cshtml",
+      "TargetPath": "Views\\Home\\Import.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\Views\\_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\Views\\Home\\Add.cshtml",
+      "TargetPath": "Views\\Home\\Add.cshtml",
       "FileKind": "mvc"
     },
     {

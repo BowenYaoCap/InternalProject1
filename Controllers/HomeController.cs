@@ -11,6 +11,7 @@ using InternalProject1.Infra;
 using System.IO;
 using OfficeOpenXml;
 using Ganss.Excel;
+using System.Net;
 
 namespace InternalProject1.Controllers
 {
@@ -38,7 +39,7 @@ namespace InternalProject1.Controllers
                         //All the information is then added to an Employee list that was initilized above.
                         for(int row = 2; row <= rowcount; row++){
                             list.Add(new Employee{
-                                Id = int.Parse(worksheet.Cells[row,1].Value.ToString().Trim()),
+                                //Id = int.Parse(worksheet.Cells[row,1].Value.ToString().Trim()),
                                 Name = worksheet.Cells[row,2].Value.ToString().Trim(),
                                 Role = worksheet.Cells[row,3].Value.ToString().Trim(),
                                 Email = worksheet.Cells[row,4].Value.ToString().Trim()
@@ -47,26 +48,34 @@ namespace InternalProject1.Controllers
                     }
                 }
                 foreach(var stu in list){
+                    //Adds each employee found from the excel file to dataAccess and saves it.
                     Employee emp = new Employee{Name = stu.Name,Role = stu.Role,Email = stu.Email};
                     dataAccess.SaveEmployee(emp);
-                    System.Console.WriteLine("Name:{0}\tRole:{1}\tEmail:{2}\tId:{3}",stu.Name,stu.Role,stu.Email,stu.Id);
+                    //System.Console.WriteLine("Name:{0}\tRole:{1}\tEmail:{2}\tId:{3}",stu.Name,stu.Role,stu.Email,stu.Id);
                 }
-                //NOTE: This will be changed as it doesn't work. Will implement DB to fix later...
                 return RedirectToAction("Index");
            }
            catch(Exception e){
+               //Catch all for exceptions related to input and file extensions. Trying to make error popups but it works for now *shrug*
                System.Console.WriteLine("ERROR: Exception {0} encountered. Make sure the file you posted exists.", e);
                return View();
            }
         }
         public IActionResult Export(){
             try{
+               
                 ExcelMapper map = new ExcelMapper();
                 var Employees = dataAccess.GetAllEmployees();
-                var newFile = @"C:\Users\acater\Documents\EmployeeList.xlsx";
+                //var newFile = @"C:\EmployeesList.xlsx";
+                var newFile = AppDomain.CurrentDomain.BaseDirectory+"..\\..\\..\\"+"EmployeeList.xlsx";
+                System.Console.WriteLine(newFile);
                 map.Save(newFile,Employees,"EmployeeList",true);
+                // using(var client = new WebClient()){
+                //     client.DownloadFile("http://localhost:5001/EmployeeList.xlsx",newFile);
+                // } 
                 return RedirectToAction("Index");
             }
+            //Catches IO Errors that likely happen as a result of an impossible file path or the file being active.
             catch(IOException e){
                 System.Console.WriteLine("Encountered IO Error {0}\nMake sure file is not being used when exporting!",e);
                 return RedirectToAction("Index");
