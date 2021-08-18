@@ -42,9 +42,9 @@ namespace InternalProject1.Controllers
                         for(int row = 2; row <= rowcount; row++){
                             list.Add(new Employee{
                                 //Id = int.Parse(worksheet.Cells[row,1].Value.ToString().Trim()),
-                                Name = worksheet.Cells[row,2].Value.ToString().Trim(),
-                                Role = worksheet.Cells[row,3].Value.ToString().Trim(),
-                                Email = worksheet.Cells[row,4].Value.ToString().Trim()
+                                Name = worksheet.Cells[row,1].Value.ToString().Trim(),
+                                Role = worksheet.Cells[row,2].Value.ToString().Trim(),
+                                Email = worksheet.Cells[row,3].Value.ToString().Trim()
                             });
                         }
                     }
