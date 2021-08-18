@@ -1,0 +1,31 @@
+@model InternalProject1.Models.Employee
+
+<h1>
+    Edit Page for @Model.Name 
+    Id: @Model.Id
+</h1>
+<head>
+    Edit the fields below and use the button to confirm changes.
+</head>
+<br></br>
+<div class="col-md-6">
+   @using(Html.BeginForm("UpdateEmployee","Home", new{Id = @Model.Id}, FormMethod.Post)){
+    
+        <pre>Name:   @Html.TextBoxFor(m => m.Name) </pre>
+    
+        <pre>Role:   @Html.TextBoxFor(m => m.Role) </pre>
+    
+        <pre>Email:  @Html.TextBoxFor(m => m.Email) </pre>
+        <br></br>
+    
+    <button type = "submit" >Update</button>
+   }
+   <br></br>
+    @using(Html.BeginForm("Index","Home", FormMethod.Get)){
+       <button type = "submit">Cancel</button>
+   }
+   <br></br>
+   @using(Html.BeginForm("DeleteEmployee","Home", new{Id = @Model.Id}, FormMethod.Get)){
+       <button type = "submit">Delete</button>
+   }
+</div>

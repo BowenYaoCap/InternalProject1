@@ -11,6 +11,7 @@ using InternalProject1.Infra;
 using System.IO;
 using OfficeOpenXml;
 using Ganss.Excel;
+using System.Net;
 
 namespace InternalProject1.Controllers
 {
@@ -21,6 +22,8 @@ namespace InternalProject1.Controllers
         public HomeController(IEmployeeDataAccess da){
             dataAccess = da;
         }
+        //This function requires a file to read uploaded from the view.
+        //Theoretically this should work on an Azure env as well.
         public async Task<IActionResult> Import(IFormFile file){
            if(file == null){
                return View();
@@ -38,7 +41,7 @@ namespace InternalProject1.Controllers
                         //All the information is then added to an Employee list that was initilized above.
                         for(int row = 2; row <= rowcount; row++){
                             list.Add(new Employee{
-                                Id = int.Parse(worksheet.Cells[row,1].Value.ToString().Trim()),
+                                //Id = int.Parse(worksheet.Cells[row,1].Value.ToString().Trim()),
                                 Name = worksheet.Cells[row,2].Value.ToString().Trim(),
                                 Role = worksheet.Cells[row,3].Value.ToString().Trim(),
                                 Email = worksheet.Cells[row,4].Value.ToString().Trim()
@@ -47,30 +50,43 @@ namespace InternalProject1.Controllers
                     }
                 }
                 foreach(var stu in list){
+                    //Adds each employee found from the excel file to dataAccess and saves it.
                     Employee emp = new Employee{Name = stu.Name,Role = stu.Role,Email = stu.Email};
                     dataAccess.SaveEmployee(emp);
-                    System.Console.WriteLine("Name:{0}\tRole:{1}\tEmail:{2}\tId:{3}",stu.Name,stu.Role,stu.Email,stu.Id);
+                    //System.Console.WriteLine("Name:{0}\tRole:{1}\tEmail:{2}\tId:{3}",stu.Name,stu.Role,stu.Email,stu.Id);
                 }
-                //NOTE: This will be changed as it doesn't work. Will implement DB to fix later...
                 return RedirectToAction("Index");
            }
            catch(Exception e){
+               //Catch all for exceptions related to input and file extensions. Trying to make error popups but it works for now *shrug*
                System.Console.WriteLine("ERROR: Exception {0} encountered. Make sure the file you posted exists.", e);
                return View();
            }
         }
         public IActionResult Export(){
-            ExcelMapper map = new ExcelMapper();
-            var Employees = new List<Employee>{
-                new Employee{Name = "Me!", Role = "THIS GUY!", Email = "TEST@EMIAL>COM", Id = 1},
-                new Employee{Name = "You", Role = "THAT GUY!", Email = "TEST@EMIAL>COM", Id = 2},
-                new Employee{Name = "US", Role = "THESE GUYS!", Email = "TEST@EMIAL>COM", Id = 3}
-            };
-            var newFile = @"C:\Users\acater\Documents\EmployeeList.xlsx";
-            map.Save(newFile,Employees,"Employee List",true);
-            return RedirectToAction("Index");
+            try{
+                //This section uses ExcelMapper to map a list of employees to an excel file and save it to the specified location
+                ExcelMapper map = new ExcelMapper();
+                var Employees = dataAccess.GetAllEmployees();
+                //The line below saves EmployeeList.xlsx to the Internal Project folder in any given structure. This will work locally but not for Azure env
+                var newFile = AppDomain.CurrentDomain.BaseDirectory+"..\\..\\..\\"+"EmployeeList.xlsx";
+                System.Console.WriteLine(newFile);
+                map.Save(newFile,Employees,"EmployeeList",true);
+
+                //this section is commented out for now but may be useful when we push to an azure enviroment.
+                // using(var client = new WebClient()){ 
+                //     client.DownloadFile("http://localhost:5001/EmployeeList.xlsx",newFile);
+                // } 
+                return RedirectToAction("Index");
+            }
+            //Catches IO Errors that likely happen as a result of an impossible file path or the file being active.
+            catch(IOException e){
+                System.Console.WriteLine("Encountered IO Error {0}\nMake sure file is not being used when exporting!",e);
+                return RedirectToAction("Index");
+            }
+            
         }
-        public IActionResult Information(int Id){
+        public IActionResult Edit(int Id){
             return View(dataAccess.GetEmployeeById(Id));
         }
         public IActionResult Index()
@@ -89,12 +105,12 @@ namespace InternalProject1.Controllers
             return View(emp);
         }
 
-        //Need to have forms with "EmployeeName","EmployeeRole", and "EmployeeEmail" ID for update method
+        //Need to have forms with "Name","Role", and "Email" ID for update method
         [HttpPost]
         public IActionResult UpdateEmployee(IFormCollection form,int id){
-            var empname = form["EmployeeName"].ToString();
-            var emprole = form["EmployeeRole"].ToString();
-            var empemail = form["EmployeeEmail"].ToString();
+            var empname = form["Name"].ToString();
+            var emprole = form["Role"].ToString();
+            var empemail = form["Email"].ToString();
             var emp = dataAccess.GetEmployeeById(id);
             if(empname != null){
                 emp.Name = empname;
@@ -113,6 +129,25 @@ namespace InternalProject1.Controllers
         public IActionResult DeleteEmployee(int id){
             dataAccess.DeleteEmployee(id);
             return RedirectToAction("Index");
+        }
+        public IActionResult Add(){
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddEmployee(IFormCollection form){
+            
+            var empname = form["Name"].ToString();
+            var emprole = form["Role"].ToString();
+            var empemail = form["Email"].ToString();
+        
+            if(empname != null&&emprole != null&&empemail !=null){
+                dataAccess.SaveEmployee(new Employee{Name = empname, Role = emprole, Email = empemail});
+                return RedirectToAction("Index");
+            }
+            else{
+                return View();
+            }
+            
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

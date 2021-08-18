@@ -24,21 +24,25 @@
     <div class ="col-md-12">
         <table class="table">
                 <tr>
+                    <td>Id</td>
                     <td>Name</td>
                     <td>Role</td>
                     <td>Email</td>
                 </tr>
             <tbody>
-                @foreach (var student in Model)
+                @foreach (var employee in Model)
                 {
                     <tr>
-                        <td>@student.Name</td>
-                        <td>@student.Role</td>
-                        <td>@student.Email</td>
-                        <td>@Html.ActionLink("Display","Information",new{Id = student.Id},htmlAttributes: new {@class="btn"}) </td>
+                        <td>@employee.Id</td>
+                        <td>@employee.Name</td>
+                        <td>@employee.Role</td>
+                        <td>@employee.Email</td>
+                        <td>@Html.ActionLink("Edit","Edit",new{Id = employee.Id},htmlAttributes: new {@class="btn"}) </td>
+                        <td>@Html.ActionLink("Delete","DeleteEmployee",new{Id = employee.Id},htmlAttributes: new {@class="btn"}) </td>
                     </tr>
                 }
             </tbody>
         </table>
+        @Html.ActionLink("Create New Employee","Add","Home",htmlAttributes: new {@class="btn btn-primary"})
     </div>
 </div>
