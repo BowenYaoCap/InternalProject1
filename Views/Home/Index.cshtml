@@ -1,22 +1,27 @@
 ﻿@model List<InternalProject1.Models.Employee>
 
 <div class ="row">
-    <div class="col-md-6">
+    <div class="col-md-3">
          <a> 
             @Html.ActionLink("Export to Excel",
             "Export",
             "Home",
-            new { @class = "btn btn-primary"}
+            htmlAttributes: new { @class = "btn btn-primary"}
             )
         </a>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-3">
         <a> 
-            @Html.ActionLink("Import to Excel",
+            @Html.ActionLink("Import from Excel",
             "Import",
             "Home",
-            new { @class = "btn btn-primary"}
+            htmlAttributes: new { @class = "btn btn-primary"}
             )
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a> 
+            @Html.ActionLink("Create New Employee","Add","Home",htmlAttributes: new {@class="btn btn-success"})
         </a>
     </div>
 </div>
@@ -28,6 +33,8 @@
                     <td>Name</td>
                     <td>Role</td>
                     <td>Email</td>
+                    <td>Edit</td>
+                    <td>Delete</td>
                 </tr>
             <tbody>
                 @foreach (var employee in Model)
@@ -37,12 +44,12 @@
                         <td>@employee.Name</td>
                         <td>@employee.Role</td>
                         <td>@employee.Email</td>
-                        <td>@Html.ActionLink("Edit","Edit",new{Id = employee.Id},htmlAttributes: new {@class="btn"}) </td>
-                        <td>@Html.ActionLink("Delete","DeleteEmployee",new{Id = employee.Id},htmlAttributes: new {@class="btn"}) </td>
+                        <td>@Html.ActionLink("Edit","Edit",new{Id = employee.Id},htmlAttributes: new {@class="btn btn-warning"}) </td>
+                        <td>@Html.ActionLink("Delete","DeleteEmployee",new{Id = employee.Id},htmlAttributes: new {@class="btn btn-danger"}) </td>
                     </tr>
                 }
             </tbody>
         </table>
-        @Html.ActionLink("Create New Employee","Add","Home",htmlAttributes: new {@class="btn btn-primary"})
+        @Html.ActionLink("Create New Employee","Add","Home",htmlAttributes: new {@class="btn btn-success"})
     </div>
 </div>
