@@ -138,6 +138,9 @@ namespace InternalProject1.Controllers
 
         [HttpGet]
         public IActionResult DeleteEmployee(int id){
+            return View(dataAccess.GetEmployeeById(id));
+        }
+        public IActionResult Delete(int id){
             dataAccess.DeleteEmployee(id);
             return RedirectToAction("Index");
         }

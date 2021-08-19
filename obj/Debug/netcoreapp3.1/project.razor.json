@@ -14447,6 +14447,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\Views\\Home\\DeleteEmployee.cshtml",
+      "TargetPath": "Views\\Home\\DeleteEmployee.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"

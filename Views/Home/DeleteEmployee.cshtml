@@ -1,0 +1,10 @@
+@model InternalProject1.Models.Employee
+
+<h1>Are you sure you want to delete @Model.Name's profile?</h1>
+<br>
+@using(Html.BeginForm("Delete","Home", new{Id = @Model.Id})){
+    <div class = "btn-group">
+    <button type="submit" class='btn btn-danger'>Yes</button>
+    @Html.ActionLink("No","Index","Home",htmlAttributes: new {@class="btn btn-success"})
+    </div>
+}
