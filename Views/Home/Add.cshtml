@@ -16,12 +16,13 @@
     
         <pre>Email:  @Html.TextBoxFor(m => m.Email) </pre>
         <br></br>
+    <div class = "btn-group">
+        <button type = "submit", class = "btn-success">Create</button>
+        <button type = "reset", class = "btn-warning">Clear</button>
+        @Html.ActionLink("Cancel","Index","Home",htmlAttributes: new {@class="btn btn-danger"})
+    </div>
     
-    <button type = "submit">Create</button>
     
     
    }
-    @using(Html.BeginForm("Index","Home", FormMethod.Post)){
-        <button type = "cancel">Cancel</button>
-    }
 </div>

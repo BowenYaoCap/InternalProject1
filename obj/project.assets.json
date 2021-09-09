@@ -7335,19 +7335,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\bowyao\\.nuget\\packages\\": {}
+    "C:\\Users\\acater\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bowyao\\Documents\\InternalProject1\\InternalProject1.csproj",
+      "projectUniqueName": "C:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj",
       "projectName": "InternalProject1",
-      "projectPath": "C:\\Users\\bowyao\\Documents\\InternalProject1\\InternalProject1.csproj",
-      "packagesPath": "C:\\Users\\bowyao\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bowyao\\Documents\\InternalProject1\\obj\\",
+      "projectPath": "C:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\InternalProject1.csproj",
+      "packagesPath": "C:\\Users\\acater\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\acater\\Documents\\NetTest\\dotnetcode\\InternalProject1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\bowyao\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\acater\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
